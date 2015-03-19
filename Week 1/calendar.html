@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 1</title>
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+<style>
+body{
+		width: 24em;
+		margin: auto;
+		background: #eee;
+	}
+#plink{
+	display:block;
+	background-color:#06F;
+	border: #69C thin solid;
+	padding: 3px;
+	text-align:center;
+	text-decoration:none;
+	color:#CCC;
+}
+#part {
+	border: #69C thin solid;
+	padding: 3px;
+	margin-top:0;	
+}
+</style>
+</head>
+
+<body>
+<div id="tabs">
+		<ul> <!-- these are the tab headers -->
+		    <li><a href="#add">add event</a></li> <!-- TODO: this header should open the 'add' tab -->
+		    <li><a href="get.php">view events</a></li> <!-- TODO: this header should open 'get.php' tab (see 'content via ajax' in the documentation)-->
+		</ul>
+		<div id="add">
+			<form action="save.php" method="post" name="addForm">
+                <p>
+                name: <input placeholder="event name" type="text" name="name"><br>
+                place/description: <textarea placeholder="place and/or description" rows="4" cols="30" name="desc"></textarea>
+                </p>
+                <a href="#" id="plink">participant:</a>
+                <div id="participant">
+                email: <input placeholder="test@test.com" type="text" name="email"><br>
+                cell: <input placeholder="0123456789"type="text" name="cell"><br>
+                </div>
+                <p>
+                date: <input placeholder="Date"type="text" name="date"><br>
+                time: <input placeholder="12:00"type="text" name="time">
+                </p>
+                <input type="submit" value="Save">
+            </form>
+		</div>
+	</div>
+<script>
+$(function () {
+	// TODO: hide <div id="participant">
+	$('#participant').hide();
+	// TODO: when <a id="plink"> is clicked, show <div id="participant">
+	$('#plink').click(function(evt) {
+		evt.preventDefault();
+		$('#participant').show();
+	});
+	// TODO: use jQuery UI to make a datepicker from <input name="date">
+		$("input[name = date]").datepicker();
+	// TODO: get data from the form when submit button is clicked and use $.post function to send the data to save.php
+	$('form[name=addForm]').submit(function(evt) {
+		evt.preventDefault();
+		//console.log($(this).serialize() );
+		var data = $(this).serialize();
+		$.post("save.php", data, function() {
+			alert('Event added');
+		});
+	});
+    // TODO: use jQuery UI to make tabs from <div id="tabs">
+	$('#tabs').tabs();
+});
+</script>
+</body>
+</html>
