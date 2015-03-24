@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 2</title>
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="jquery.timepicker.css">
+<link rel="stylesheet" href="fullcalendar.min.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+<script src="jquery.timepicker.min.js"></script>
+<script src="jquery.validate.min.js"></script>
+<script src="jquery.form.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+<script src="fullcalendar.min.js"></script>
+<style>
+body {
+	width: 48em;
+	margin: auto;
+	background: #eee;
+}
+#plink {
+	display:block;
+	background-color:#06F;
+	border: #69C thin solid;
+	padding: 3px;
+	text-align:center;
+	text-decoration:none;
+	color:#CCC;
+}
+#part {
+	border: #69C thin solid;
+	padding: 3px;
+	margin-top:0;
+}
+
+.error{
+	font-size: 0.7em;
+	color: red;
+	display:block;
+}
+</style>
+</head>
+
+<body>
+<div id="tabs">
+  <ul>
+    <!-- these are the tab headers -->
+    <li><a href="#add">add event</a></li>
+    <!-- TODO: this header should open the 'add' tab -->
+    <li><a href="get.php">view events</a></li>
+    <!-- TODO: this header should open 'get.php' tab (see 'content via ajax' in the documentation)-->
+  </ul>
+  <div id="add">
+    <form action="save.php" method="post" name="addForm">
+      <p> name:
+        <input placeholder="event name" type="text" name="name">
+        <br>
+        place/description:
+        <textarea placeholder="place and/or description" rows="4" cols="30" name="desc"></textarea>
+      </p>
+      <a href="#" id="plink">participant:</a>
+      <div id="participant"> email:
+        <input placeholder="test@test.com" type="text" name="email">
+        <br>
+        cell:
+        <input placeholder="0123456789" type="text" name="cell">
+        <br>
+      </div>
+      <p> date:
+        <input placeholder="Date" type="text" name="date">
+        <br>
+        time:
+        <input placeholder="12:00" type="text" name="time">
+      </p>
+      <input type="submit" value="Save">
+    </form>
+  </div>
+</div>
+<script>
+
+$(function (){
+	$('#participant').hide();
+	$('#plink').click(function() {
+		$('#participant').show();
+	});
+	
+	$('input[name=date]').datepicker();
+	
+	// TODO: set <input name="time"> to be a timepicker
+	$("input[name='time']").timepicker({ 'scrollDefault': 'now' });
+	
+	// TODO: validate form: name field is required, email field should validate as email, cell field should be a number, date and time are required
+		$('form[name=addForm]').validate({
+			rules: {
+				name: "required",
+				date: "required",
+				time: "required",
+				email: "email",
+				cell: "number"
+			},
+			submitHandler: function(form){
+				$(form).ajaxSubmit(function() {
+					alert("Tallennettu");
+				});
+			}
+		});
+		
+	
+	// TODO: if the form validates, use the jQuery Form Plugin to send the form
+	
+	
+	$('#tabs').tabs();
+});
+
+
+</script>
+</body>
+</html>
