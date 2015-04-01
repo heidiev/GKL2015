@@ -1,0 +1,110 @@
+﻿$body-font: "Helvetica Neue", sans-serif;
+$header-font: "Verdana", sans-serif;
+$font-size1: 12px;
+$font-size2: 14px;
+$color1: #FAA055;
+$color2: #F9892B;
+$color3: #F2F2F2;
+$color4: #cccccc;
+$color5: #ffffff;
+
+@mixin gradient($eka, $toka){
+  background-image: linear-gradient(bottom, $eka 24%, $toka 86%);
+  background-image: -moz-linear-gradient(bottom, $eka 24%, $toka 86%);
+  background-image: -webkit-linear-gradient(bottom, $eka 24%, $toka 86%);
+}
+
+@mixin border(){
+  border-radius: 8px;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+}
+body {
+	width: 50em;
+	margin: 0 auto;
+	font-family: $body-font;
+	font-size: $font-size1;
+	@include gradient($color1, $color2);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+header, article, footer {
+  background-color: $color5;
+  @include border;
+  width: 640px;
+  border: 1px solid #000000;
+  margin-bottom: 4px;
+  padding: 8px;
+}
+header h1 {
+  font-family: $header-font;
+  text-align: center;
+  font-size: $font-size2;
+}
+nav {
+  width: 640px;
+  clear: left;
+  float: left;
+  overflow: hidden;
+
+	ul {
+	  height: 40px;
+	  clear: left;
+	  float: left;
+	  position: relative;
+	  left: 50%;
+	  text-align: center;
+	}
+	li {
+	  float: left;
+	  position: relative;
+	  right: 50%;
+	
+		a {
+		  @include border;
+		  display: block;
+		  line-height: 30px;
+		  padding: 0 20px 0 20px;
+		  margin: 0 4px 0 4px;
+		  @include gradient($color3, $color4);
+		  color: #0f0f0f;
+		  text-decoration: none;
+		  border: 2px outset #ffffff;
+		
+			:hover {
+			  @include gradient($color5, $color4);
+			}
+		}
+	}
+}
+
+article {
+  float: left;
+  line-height: 140%;
+
+	img {
+	  @include border;
+	  float: right;
+	  border: 2px solid #000;
+	  margin-left: 8px;
+	}
+	h2 {
+	  font-family: $header-font;
+	  font-size: $font-size2;
+	  line-height: 140%;
+	}
+	h3 {
+	  font-family: $header-font;
+	  font-size: $font-size2;
+	  line-height: 140%;
+	  margin-top: 8px;
+	}
+	p {
+	  margin-bottom: 12px;
+	}
+}
+
+footer {
+  float: left;
+  text-align: center;
+}
